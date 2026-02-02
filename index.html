@@ -18,11 +18,11 @@
     
     <style>
         /* =========================================
-           VARIABLES & CONFIGURACIÓN
+           VARIABLES & CONFIGURACIï¿½N
            ========================================= */
         :root {
-            --bg-image: url('https://images.unsplash.com/photo-1604014237800-1c9102c219da?q=80&w=1000&auto=format&fit=crop'); 
-            --bg-invitacion: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1000&auto=format&fit=crop');
+            --bg-image: url('fondo.jpg'); 
+            --bg-invitacion: url('invitacion.jpg');
             --gold-light: #FFF5C3;
             --gold-mid: #D4AF37;
             --gold-dark: #886C21;
@@ -56,11 +56,11 @@
             background-color: #000;
             color: white;
             font-family: 'Montserrat', sans-serif;
-            position: fixed; /* Ayuda a fijar la vista en móviles */
+            position: fixed; /* Ayuda a fijar la vista en mï¿½viles */
         }
 
         /* =========================================
-           PARTÍCULAS & EFECTOS MEJORADOS
+           PARTï¿½CULAS & EFECTOS MEJORADOS
            ========================================= */
         #particles-container {
             position: absolute;
@@ -74,7 +74,7 @@
             position: absolute;
             border-radius: 50%;
             pointer-events: none;
-            /* Efecto de brillo más fuerte */
+            /* Efecto de brillo mï¿½s fuerte */
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 5px var(--gold-mid);
             opacity: 0.8;
         }
@@ -97,7 +97,7 @@
             filter: blur(30px) brightness(0.4);
             transform: scale(1.1);
             z-index: 0;
-            display: none; /* Oculto en móvil para rendimiento */
+            display: none; /* Oculto en mï¿½vil para rendimiento */
         }
         
         @media (min-width: 600px) {
@@ -226,7 +226,7 @@
         }
         .btn-back:hover { background: var(--gold-mid); color: #000; transform: scale(1.1); }
 
-        /* VISTA INVITACIÓN */
+        /* VISTA INVITACIï¿½N */
         #view-invitacion {
             background-image: var(--bg-invitacion);
             background-size: cover;
@@ -287,7 +287,7 @@
             animation: goldenPulse 3s infinite;
         }
 
-        /* VISTA UBICACIÓN */
+        /* VISTA UBICACIï¿½N */
         #view-ubicacion {
             align-items: center;
             justify-content: center;
@@ -303,7 +303,7 @@
             border-radius: 10px;
         }
 
-        /* VISTA GALERÍA */
+        /* VISTA GALERï¿½A */
         #view-galeria {
             overflow: hidden;
             flex-direction: column;
@@ -412,13 +412,13 @@
 
     <div class="mobile-wrapper">
 
-        <!-- Contenedor de Partículas -->
+        <!-- Contenedor de Partï¿½culas -->
         <div id="particles-container"></div>
         
         <!-- VISTA 1: HOME -->
         <section id="home-view" class="view-section" style="display: block;">
-            <div onclick="navigateTo('invitacion')" class="btn-gold" id="btn-invitacion">Invitación</div>
-            <div onclick="navigateTo('galeria')" class="btn-gold" id="btn-galeria-home">Galería</div>
+            <div onclick="navigateTo('invitacion')" class="btn-gold" id="btn-invitacion">Invitaciï¿½n</div>
+            <div onclick="navigateTo('galeria')" class="btn-gold" id="btn-galeria-home">Galerï¿½a</div>
             <div onclick="navigateTo('recuerdo')" class="btn-gold" id="btn-recuerdo-home">Recuerdo</div>
             
             <!-- Link WhatsApp -->
@@ -427,39 +427,39 @@
             </a>
         </section>
 
-        <!-- VISTA 2: INVITACIÓN -->
+        <!-- VISTA 2: INVITACIï¿½N -->
         <section id="view-invitacion" class="view-section">
             <button class="btn-back" onclick="goBack()"><i class="ph ph-arrow-left"></i></button>
             
             <div class="invite-container">
-                <h2 class="no-select" style="font-family: 'Playfair Display'; color: white; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 5px;">Celebración</h2>
+                <h2 class="no-select" style="font-family: 'Playfair Display'; color: white; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 5px;">Celebraciï¿½n</h2>
                 <p class="invite-script-text no-select">
-                    "La magia de la vida está en los momentos compartidos. Acompáñanos a celebrar una noche inolvidable."
+                    "La magia de la vida estï¿½ en los momentos compartidos. Acompï¿½ï¿½anos a celebrar una noche inolvidable."
                 </p>
 
                 <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; align-items: center;">
-                    <button class="sub-nav-btn" onclick="navigateTo('ubicacion')">UBICACIÓN</button>
-                    <button class="sub-nav-btn" onclick="navigateTo('galeria')">GALERÍA</button>
+                    <button class="sub-nav-btn" onclick="navigateTo('ubicacion')">UBICACIï¿½N</button>
+                    <button class="sub-nav-btn" onclick="navigateTo('galeria')">GALERï¿½A</button>
                     <button class="sub-nav-btn" onclick="navigateTo('recuerdo')">RECUERDOS</button>
-                    <!-- NUEVO BOTÓN: CONFIRMAR ASISTENCIA -->
+                    <!-- NUEVO BOTï¿½N: CONFIRMAR ASISTENCIA -->
                     <button class="sub-nav-btn btn-confirmar" onclick="window.open('https://wa.me/59165620007?text=Hola%2C%20quiero%20confirmar%20mi%20asistencia%20a%20la%20boda', '_blank')">CONFIRMAR ASISTENCIA</button>
                 </div>
             </div>
         </section>
 
-        <!-- VISTA 3: UBICACIÓN -->
+        <!-- VISTA 3: UBICACIï¿½N -->
         <section id="view-ubicacion" class="view-section">
             <button class="btn-back" onclick="goBack()"><i class="ph ph-arrow-left"></i></button>
-            <h2 class="invite-script-text no-select" style="font-size: 3rem; margin-top: 10px;">Ubicación</h2>
+            <h2 class="invite-script-text no-select" style="font-size: 3rem; margin-top: 10px;">Ubicaciï¿½n</h2>
             <p class="no-select" style="color: #ccc; margin-bottom: 10px;">Edificio Burano<br>La Paz, Bolivia</p>
             <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d507.18061890062484!2d-68.12657909788366!3d-16.500529058268803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915f218d943d91d9%3A0x806280056b820b22!2sEdificio%20Burano!5e1!3m2!1ses!2sbo!4v1769987961397!5m2!1ses!2sbo" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <a href="https://maps.app.goo.gl/6vUnDNdtYt7A6uY39" target="_blank" class="btn-gold" style="position: relative; transform: none; top: auto; left: auto; margin-top: 30px; width: 80%; font-size: 14px; text-decoration: none;">ABRIR EN GOOGLE MAPS</a>
         </section>
 
-        <!-- VISTA 4: GALERÍA -->
+        <!-- VISTA 4: GALERï¿½A -->
         <section id="view-galeria" class="view-section">
             <button class="btn-back" style="top: max(20px, env(safe-area-inset-top) + 10px); left: 20px;" onclick="goBack()"><i class="ph ph-arrow-left"></i></button>
-            <h2 class="no-select" style="position: absolute; top: max(30px, env(safe-area-inset-top) + 10px); width: 100%; text-align: center; color: var(--gold-mid); font-family: 'Playfair Display'; text-transform: uppercase; letter-spacing: 4px;">Galería</h2>
+            <h2 class="no-select" style="position: absolute; top: max(30px, env(safe-area-inset-top) + 10px); width: 100%; text-align: center; color: var(--gold-mid); font-family: 'Playfair Display'; text-transform: uppercase; letter-spacing: 4px;">Galerï¿½a</h2>
 
             <div class="gallery-window">
                 <div class="gallery-track">
@@ -492,14 +492,14 @@
 
     </div>
 
-    <!-- SCRIPT DE LÓGICA -->
+    <!-- SCRIPT DE Lï¿½GICA -->
     <script>
         // --- 1. Variables de Estado ---
         let currentViewId = 'home';
         let historyStack = []; 
         let galleryAnimation = null;
 
-        // --- 2. Navegación SIN EFECTOS (Instantánea) ---
+        // --- 2. Navegaciï¿½n SIN EFECTOS (Instantï¿½nea) ---
         function navigateTo(target, pushToHistory = true) {
             const nextViewId = target === 'home' ? 'home-view' : `view-${target}`;
             const currentView = document.getElementById(currentViewId === 'home' ? 'home-view' : `view-${currentViewId}`);
@@ -507,7 +507,7 @@
 
             if (!nextView) return; // Seguridad si el ID no existe
 
-            // Historial: Solo agregamos si es una navegación nueva, no si estamos volviendo
+            // Historial: Solo agregamos si es una navegaciï¿½n nueva, no si estamos volviendo
             if (pushToHistory && currentViewId !== 'home') {
                 historyStack.push(currentViewId);
             } else if (target === 'home') {
@@ -515,14 +515,14 @@
                 historyStack = [];
             }
 
-            // CAMBIO INSTANTÁNEO
+            // CAMBIO INSTANTï¿½NEO
             if (currentView) currentView.style.display = 'none';
             
             // Pausar video al salir
             const video = document.querySelector('video');
             if (video && target !== 'recuerdo') video.pause(); 
             
-            // Galería lógica
+            // Galerï¿½a lï¿½gica
             if(target === 'galeria') startGalleryAuto();
             else stopGalleryAuto();
 
@@ -533,19 +533,19 @@
             currentViewId = target;
         }
 
-        // --- 3. Función Volver CORREGIDA ---
+        // --- 3. Funciï¿½n Volver CORREGIDA ---
         function goBack() {
-            // Si hay historial, sacamos el último. Si no, forzamos ir a Home.
+            // Si hay historial, sacamos el ï¿½ltimo. Si no, forzamos ir a Home.
             if (historyStack.length > 0) {
                 const previousView = historyStack.pop();
-                navigateTo(previousView, false); // false = no añadir al historial de nuevo
+                navigateTo(previousView, false); // false = no aï¿½adir al historial de nuevo
             } else {
-                // Fallback seguro: siempre vuelve a Home si el stack está vacío
+                // Fallback seguro: siempre vuelve a Home si el stack estï¿½ vacï¿½o
                 navigateTo('home', false);
             }
         }
 
-        // --- 4. Partículas "Mágicas" (AUMENTADAS Y GRANDES) ---
+        // --- 4. Partï¿½culas "Mï¿½gicas" (AUMENTADAS Y GRANDES) ---
         function createParticles() {
             const container = document.getElementById('particles-container');
             const particleCount = 60; // Cantidad
@@ -554,7 +554,7 @@
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                // Tamaños MÁS GRANDES como pidió el usuario
+                // Tamaï¿½os Mï¿½S GRANDES como pidiï¿½ el usuario
                 const size = Math.random() * 8 + 3; // De 3px a 11px
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
@@ -565,13 +565,13 @@
                 const isGold = Math.random() > 0.5; 
                 particle.style.background = isGold ? 'rgba(255, 215, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)';
                 
-                // Retraso de animación CSS
+                // Retraso de animaciï¿½n CSS
                 particle.style.animationDelay = `${Math.random() * 5}s`;
 
                 container.appendChild(particle);
 
                 // Movimiento suave con GSAP
-                const speed = Math.random() * 15 + 10; // Movimiento más lento y majestuoso
+                const speed = Math.random() * 15 + 10; // Movimiento mï¿½s lento y majestuoso
                 const dirY = -150 - (Math.random() * 200); 
 
                 gsap.to(particle, {
@@ -587,7 +587,7 @@
         }
         createParticles();
 
-        // --- 5. Animación Inicial Home ---
+        // --- 5. Animaciï¿½n Inicial Home ---
         gsap.from(".btn-gold", {
             duration: 1.5,
             y: 30,
@@ -597,7 +597,7 @@
             delay: 0.5
         });
 
-        // --- 6. Galería Automática (MÁS RÁPIDA) ---
+        // --- 6. Galerï¿½a Automï¿½tica (Mï¿½S Rï¿½PIDA) ---
         function startGalleryAuto() {
             if(galleryAnimation) galleryAnimation.kill();
             
@@ -607,7 +607,7 @@
             
             galleryAnimation = gsap.timeline({ repeat: -1 });
             
-            // Tiempos ajustados: 0.8s duración, 1.5s espera (delay)
+            // Tiempos ajustados: 0.8s duraciï¿½n, 1.5s espera (delay)
             const speed = 0.8; 
             const pause = 1.2;
 
@@ -638,7 +638,7 @@
             }
         }
 
-        // --- 7. Ajustes Altura Móvil (Fix barra navegador) ---
+        // --- 7. Ajustes Altura Mï¿½vil (Fix barra navegador) ---
         const setAppHeight = () => {
             const doc = document.documentElement;
             doc.style.setProperty('--app-height', `${window.innerHeight}px`);
