@@ -432,7 +432,7 @@
             box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
         }
         
-        .video-container iframe {
+        .video-container iframe, .video-container video {
             width: 100%;
             height: 100%;
             border: none;
@@ -565,7 +565,7 @@
         <section id="view-ubicacion" class="view-section">
             <button class="btn-back" onclick="goBack()"><i class="ph ph-arrow-left"></i></button>
             <h2 class="invite-script-text no-select" style="font-size: 3rem; margin-top: 10px;">Ubicación</h2>
-            <p class="no-select" style="color: #ccc; margin-bottom: 10px;">Edificio Burano<br>La Paz, Bolivia</p>
+            <p class="no-select" style="color: #ccc; margin-bottom: 10px;">Edificio Burano<br>Av. Simon Bolivar, La Paz, Bolivia</p>
             <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d507.18061890062484!2d-68.12657909788366!3d-16.500529058268803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915f218d943d91d9%3A0x806280056b820b22!2sEdificio%20Burano!5e1!3m2!1ses!2sbo!4v1769987961397!5m2!1ses!2sbo" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <a href="https://maps.app.goo.gl/6vUnDNdtYt7A6uY39" target="_blank" class="btn-gold" style="position: relative; transform: none; top: auto; left: auto; margin-top: 30px; width: 80%; font-size: 14px; text-decoration: none;">ABRIR EN GOOGLE MAPS</a>
         </section>
@@ -595,6 +595,7 @@
             <button class="btn-back" style="position: absolute; top: max(25px, env(safe-area-inset-top) + 10px); left: 25px; z-index: 200;" onclick="goBack()"><i class="ph ph-arrow-left"></i></button>
             
             <div class="video-container">
+                <!-- El contenido se cargará dinámicamente según la sección de origen -->
                 <iframe src="https://drive.google.com/file/d/1yOOSH_Rcy8Akm2feDW6a2hFkvDRKGbpp/preview" allow="autoplay"></iframe>
             </div>
         </section>
@@ -620,12 +621,13 @@
         const galleryConfig = {
             home: {
                 images: [
-                    "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg",
+                    "1.jpg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg",
                     "7.jpeg", "8.jpeg", "9.jpeg", "10.jpeg", "11.jpeg", "12.jpeg",
-                    "13.jpeg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpeg", "18.jpeg"
+                    "13.jpeg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpeg"
                 ],
                 title: "Galería",
-                text: " "
+                // MODIFICACIÓN SOLICITADA: Mensaje emotivo para las amigas
+                text: "¡Amigas queridas! Gracias por ser parte de mi historia y regalarme tantos momentos inolvidables."
             },
             invitacion: {
                 images: [
@@ -689,11 +691,23 @@
             // Lógica específica por vista
             if (target === 'galeria') {
                 setupGallery(sourceContext);
+            } else if (target === 'recuerdo') {
+                // MODIFICACIÓN SOLICITADA: Cargar video dinámicamente según el origen
+                const videoContainer = document.querySelector('#view-recuerdo .video-container');
+                
+                // Si venimos de la pantalla de INVITACIÓN (botón VIDEO) -> video2.mp4
+                if (currentViewId === 'invitacion') {
+                    videoContainer.innerHTML = '<video src="video2.mp4" controls autoplay playsinline style="width:100%; height:100%; object-fit:cover; border-radius: 15px;"></video>';
+                } 
+                // Si venimos del HOME (botón RECUERDO) -> Iframe de Google Drive
+                else {
+                    videoContainer.innerHTML = '<iframe src="https://drive.google.com/file/d/1yOOSH_Rcy8Akm2feDW6a2hFkvDRKGbpp/preview" allow="autoplay" style="width:100%; height:100%; border:none;"></iframe>';
+                }
+                
+                stopGalleryAuto();
             } else {
                 stopGalleryAuto();
             }
-
-            // Nota: La lógica de video se simplificó al usar un iframe estático en Recuerdo
 
             nextView.style.display = (target === 'home') ? 'block' : 'flex';
             currentViewId = target;
