@@ -1,8 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta property="og:title" content="Invitación de Valentina">
+    <meta property="og:description" content="Te invitamos a celebrar un día muy especial lleno de amor y alegría.">
+    <meta property="og:image" content="https://github.com/TicketegBOL/Valentina/raw/refs/heads/main/preview.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
     <title>Hunter Designer Experience</title>
     
     <!-- GSAP Core -->
@@ -12,13 +17,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,600;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Lora&family=Montserrat&display=swap" rel="stylesheet">
+
     <!-- Iconos Phosphor -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     
     <style>
         /* =========================================
-           VARIABLES & CONFIGURACI�N
+           VARIABLES & CONFIGURACIÓN
            ========================================= */
         :root {
             --bg-image: url('fondo.jpg'); 
@@ -52,20 +58,20 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden; /* Evita scroll indeseado */
+            overflow: hidden; 
             background-color: #000;
             color: white;
             font-family: 'Montserrat', sans-serif;
-            position: fixed; /* Ayuda a fijar la vista en m�viles */
+            position: fixed; 
         }
 
         /* =========================================
-           PART�CULAS & EFECTOS MEJORADOS
+           PARTÍCULAS & ICONOS FLOTANTES
            ========================================= */
-        #particles-container {
+        #particles-container, #party-icons-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
+            pointer-events: none; /* CLAVE: No afectan el clic */
             z-index: 5;
             overflow: hidden;
         }
@@ -73,10 +79,16 @@
         .particle {
             position: absolute;
             border-radius: 50%;
-            pointer-events: none;
-            /* Efecto de brillo m�s fuerte */
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 5px var(--gold-mid);
             opacity: 0.8;
+        }
+
+        .party-icon {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.6;
+            filter: drop-shadow(0 0 5px rgba(255,215,0,0.5));
+            z-index: 6;
         }
 
         @keyframes goldenPulse {
@@ -97,7 +109,7 @@
             filter: blur(30px) brightness(0.4);
             transform: scale(1.1);
             z-index: 0;
-            display: none; /* Oculto en m�vil para rendimiento */
+            display: none;
         }
         
         @media (min-width: 600px) {
@@ -143,17 +155,16 @@
         .view-section {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            display: none; /* Por defecto oculto */
+            display: none;
             flex-direction: column;
             background: var(--glass-bg);
             z-index: 20;
-            /* Relleno para evitar la zona del "notch" o barra de estado */
             padding-top: env(safe-area-inset-top); 
             padding-bottom: env(safe-area-inset-bottom);
         }
 
         #home-view {
-            display: block; /* Solo home visible al inicio */
+            display: block; 
             z-index: 50;
             background: transparent; 
         }
@@ -208,7 +219,7 @@
         
         .btn-back {
             position: absolute;
-            top: max(25px, env(safe-area-inset-top) + 10px); /* Ajuste seguro */
+            top: max(25px, env(safe-area-inset-top) + 10px); 
             left: 20px;
             background: rgba(0,0,0,0.6);
             border: 1px solid var(--gold-mid);
@@ -226,7 +237,7 @@
         }
         .btn-back:hover { background: var(--gold-mid); color: #000; transform: scale(1.1); }
 
-        /* VISTA INVITACI�N */
+        /* VISTA INVITACIÓN */
         #view-invitacion {
             background-image: var(--bg-invitacion);
             background-size: cover;
@@ -250,7 +261,7 @@
 
         .invite-script-text {
             font-family: 'Great Vibes', cursive;
-            font-size: 2.4rem;
+            font-size: 1.7rem;
             line-height: 1.2;
             color: var(--gold-light);
             text-shadow: 0 2px 10px rgba(0,0,0,1);
@@ -287,7 +298,7 @@
             animation: goldenPulse 3s infinite;
         }
 
-        /* VISTA UBICACI�N */
+        /* VISTA UBICACIÓN */
         #view-ubicacion {
             align-items: center;
             justify-content: center;
@@ -303,12 +314,34 @@
             border-radius: 10px;
         }
 
-        /* VISTA GALER�A */
+        /* VISTA GALERÍA */
         #view-galeria {
             overflow: hidden;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+
+        .gallery-title {
+            position: absolute; 
+            top: max(30px, env(safe-area-inset-top) + 10px); 
+            width: 100%; 
+            text-align: center; 
+            color: var(--gold-mid); 
+            font-family: 'Playfair Display'; 
+            text-transform: uppercase; 
+            letter-spacing: 4px;
+        }
+
+        .gallery-description {
+            position: absolute;
+            top: max(70px, env(safe-area-inset-top) + 45px);
+            width: 90%;
+            text-align: center;
+            color: #ddd;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-style: italic;
         }
 
         .gallery-window {
@@ -325,6 +358,7 @@
             display: flex;
             gap: 20px;
             padding-left: 20px;
+            width: max-content; /* IMPORTANTE: Permite que el ancho sea dinámico */
         }
 
         .gallery-card {
@@ -336,10 +370,38 @@
             flex-shrink: 0;
             position: relative;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            cursor: zoom-in; /* Indica que se puede hacer clic */
         }
         .gallery-card img {
             width: 100%; height: 100%; object-fit: cover;
             transition: transform 0.5s;
+        }
+
+        /* LIGHTBOX (Zoom de imagen) */
+        #lightbox {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 300;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        #lightbox img {
+            max-width: 95%;
+            max-height: 80%;
+            border: 2px solid var(--gold-mid);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+        #lightbox-close {
+            position: absolute;
+            top: 40px; right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
         }
         
         /* VISTA RECUERDO (VIDEO 9:16) */
@@ -384,6 +446,8 @@
             text-decoration: none; 
             cursor: pointer; 
             pointer-events: auto; 
+            /* Modificado: Inicialmente oculto */
+            display: none;
         }
         
         .footer-hunter span {
@@ -404,6 +468,34 @@
             to { background-position: 200% center; }
         }
 
+        /* =========================================
+           CONTROL DE MÚSICA
+           ========================================= */
+        #music-control {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--gold-mid);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: var(--gold-mid);
+            font-size: 22px;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            transition: 0.3s;
+        }
+        #music-control:hover {
+            transform: scale(1.1);
+            background: var(--gold-mid);
+            color: black;
+        }
+
     </style>
 </head>
 <body class="no-select">
@@ -411,65 +503,80 @@
     <div class="backdrop-blur"></div>
 
     <div class="mobile-wrapper">
-
-        <!-- Contenedor de Part�culas -->
-        <div id="particles-container"></div>
         
+        <!-- AUDIO DE FONDO -->
+        <audio id="bg-music" loop>
+            <source src="musica.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- BOTÓN CONTROL DE MÚSICA -->
+        <div id="music-control" onclick="toggleMusic()">
+            <i id="music-icon" class="ph ph-speaker-slash"></i>
+        </div>
+
+        <!-- Contenedor de Partículas -->
+        <div id="particles-container"></div>
+        <!-- Contenedor de Iconos Party -->
+        <div id="party-icons-container"></div>
+        
+        <!-- Lightbox para ver fotos grandes -->
+        <div id="lightbox" onclick="closeLightbox()">
+            <div id="lightbox-close">&times;</div>
+            <img id="lightbox-img" src="" alt="Zoom">
+        </div>
+
+        <!-- FOOTER GLOBAL (Movido fuera del home-view) -->
+        <a href="https://wa.me/59165620007?text=Buenas%2C%20Estoy%20interesado%20en%20las%20invitaciones%20digitales" target="_blank" class="footer-hunter" id="global-footer">
+            <span>HunterDesigner</span>
+        </a>
+
         <!-- VISTA 1: HOME -->
         <section id="home-view" class="view-section" style="display: block;">
-            <div onclick="navigateTo('invitacion')" class="btn-gold" id="btn-invitacion">Invitaci�n</div>
-            <div onclick="navigateTo('galeria')" class="btn-gold" id="btn-galeria-home">Galer�a</div>
+            <div onclick="navigateTo('invitacion')" class="btn-gold" id="btn-invitacion">Invitación</div>
+            <div onclick="navigateTo('galeria')" class="btn-gold" id="btn-galeria-home">Galería</div>
             <div onclick="navigateTo('recuerdo')" class="btn-gold" id="btn-recuerdo-home">Recuerdo</div>
-            
-            <!-- Link WhatsApp -->
-            <a href="https://wa.me/59165620007?text=Buenas%2C%20Estoy%20interesado%20en%20las%20invitaciones%20digitales" target="_blank" class="footer-hunter">
-                <span>HunterDesigner</span>
-            </a>
         </section>
 
-        <!-- VISTA 2: INVITACI�N -->
+        <!-- VISTA 2: INVITACIÓN -->
         <section id="view-invitacion" class="view-section">
             <button class="btn-back" onclick="goBack()"><i class="ph ph-arrow-left"></i></button>
             
             <div class="invite-container">
-                <h2 class="no-select" style="font-family: 'Playfair Display'; color: white; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 5px;">Celebraci�n</h2>
+                <h2 class="no-select" style="font-family: 'Playfair Display'; color: white; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 5px;">Invitación</h2>
                 <p class="invite-script-text no-select">
-                    "La magia de la vida est� en los momentos compartidos. Acomp��anos a celebrar una noche inolvidable."
+                    Con mucha alegría en mi corazón, quiero invitarlas, queridas amigas de este grupo tan inseparable, a celebrar conmigo un año más de vida. Será una tarde especial para compartir risas, recuerdos y el cariño que nos une. Las espero este domingo 8 de febrero a las 15:00 hrs, en el Salón “Burano”, Av. Simón Bolívar.
                 </p>
 
                 <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; align-items: center;">
-                    <button class="sub-nav-btn" onclick="navigateTo('ubicacion')">UBICACI�N</button>
-                    <button class="sub-nav-btn" onclick="navigateTo('galeria')">GALER�A</button>
-                    <button class="sub-nav-btn" onclick="navigateTo('recuerdo')">RECUERDOS</button>
-                    <!-- NUEVO BOT�N: CONFIRMAR ASISTENCIA -->
-                    <button class="sub-nav-btn btn-confirmar" onclick="window.open('https://wa.me/59165620007?text=Hola%2C%20quiero%20confirmar%20mi%20asistencia%20a%20la%20boda', '_blank')">CONFIRMAR ASISTENCIA</button>
+                    <button class="sub-nav-btn" onclick="navigateTo('ubicacion')">UBICACIÓN</button>
+                    <button class="sub-nav-btn" onclick="navigateTo('galeria')">GALERÍA</button>
+                    <button class="sub-nav-btn" onclick="navigateTo('recuerdo')">VIDEO</button>
+                    <button class="sub-nav-btn btn-confirmar" onclick="window.open('https://wa.me/59173293146?text=Hola%2C%20quiero%20confirmar%20mi%20asistencia%20a%20la%20boda', '_blank')">CONFIRMAR ASISTENCIA</button>
                 </div>
             </div>
         </section>
 
-        <!-- VISTA 3: UBICACI�N -->
+        <!-- VISTA 3: UBICACIÓN -->
         <section id="view-ubicacion" class="view-section">
             <button class="btn-back" onclick="goBack()"><i class="ph ph-arrow-left"></i></button>
-            <h2 class="invite-script-text no-select" style="font-size: 3rem; margin-top: 10px;">Ubicaci�n</h2>
+            <h2 class="invite-script-text no-select" style="font-size: 3rem; margin-top: 10px;">Ubicación</h2>
             <p class="no-select" style="color: #ccc; margin-bottom: 10px;">Edificio Burano<br>La Paz, Bolivia</p>
             <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d507.18061890062484!2d-68.12657909788366!3d-16.500529058268803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915f218d943d91d9%3A0x806280056b820b22!2sEdificio%20Burano!5e1!3m2!1ses!2sbo!4v1769987961397!5m2!1ses!2sbo" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <a href="https://maps.app.goo.gl/6vUnDNdtYt7A6uY39" target="_blank" class="btn-gold" style="position: relative; transform: none; top: auto; left: auto; margin-top: 30px; width: 80%; font-size: 14px; text-decoration: none;">ABRIR EN GOOGLE MAPS</a>
         </section>
 
-        <!-- VISTA 4: GALER�A -->
+        <!-- VISTA 4: GALERÍA -->
         <section id="view-galeria" class="view-section">
             <button class="btn-back" style="top: max(20px, env(safe-area-inset-top) + 10px); left: 20px;" onclick="goBack()"><i class="ph ph-arrow-left"></i></button>
-            <h2 class="no-select" style="position: absolute; top: max(30px, env(safe-area-inset-top) + 10px); width: 100%; text-align: center; color: var(--gold-mid); font-family: 'Playfair Display'; text-transform: uppercase; letter-spacing: 4px;">Galer�a</h2>
+            
+            <!-- Título y descripción DINÁMICOS -->
+            <h2 id="gallery-title" class="no-select gallery-title">Galería</h2>
+            <p id="gallery-desc" class="no-select gallery-description">Los momentos que compartimos son únicos!</p>
 
             <div class="gallery-window">
-                <div class="gallery-track">
-                    <div class="gallery-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"></div>
-                    <div class="gallery-card"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80"></div>
-                    <div class="gallery-card"><img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?auto=format&fit=crop&w=600&q=80"></div>
-                    <div class="gallery-card"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=600&q=80"></div>
-                    <div class="gallery-card"><img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80"></div>
-                    <div class="gallery-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"></div>
-                    <div class="gallery-card"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80"></div>
+                <!-- El contenido se inyecta por JS según desde donde vengas -->
+                <div class="gallery-track" id="gallery-track-inner">
+                    <!-- Images will be inserted here -->
                 </div>
             </div>
             
@@ -483,8 +590,8 @@
             <button class="btn-back" style="position: absolute; top: max(25px, env(safe-area-inset-top) + 10px); left: 25px; z-index: 200;" onclick="goBack()"><i class="ph ph-arrow-left"></i></button>
             
             <div class="video-container">
-                <video controls controlsList="nodownload" playsinline poster="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=600&q=80">
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-vertical-shot-of-a-woman-dancing-at-a-party-43632-large.mp4" type="video/mp4">
+                <video id="main-video" controls controlsList="nodownload" playsinline poster="fondo2.jpeg">
+                    <source id="video-source" src="" type="video/mp4">
                     Tu navegador no soporta video.
                 </video>
             </div>
@@ -492,86 +599,235 @@
 
     </div>
 
-    <!-- SCRIPT DE L�GICA -->
+    <!-- SCRIPT DE LÓGICA -->
     <script>
         // --- 1. Variables de Estado ---
         let currentViewId = 'home';
         let historyStack = []; 
         let galleryAnimation = null;
+        let isMusicPlaying = false;
+        
+        // Configuración de Medios
+        const videos = {
+            home: "video.mp4",
+            invitacion: "video2.mp4"
+        };
+        
+        // CONFIGURACIÓN DE GALERÍAS
+        const galleryConfig = {
+            home: {
+                images: [
+                    "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpeg",
+                    "7.jpeg", "8.jpeg", "9.jpeg", "10.jpeg", "11.jpeg", "12.jpeg",
+                    "13.jpeg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpeg", "18.jpeg"
+                ],
+                title: "Galería",
+                text: " "
+            },
+            invitacion: {
+                images: [
+                    "x1.jpg", "x2.jpeg", "x3.jpeg", "x4.jpeg", "x5.jpeg"
+                ],
+                title: "Momentos",
+                text: "Los momentos que compartimos son únicos!"
+            }
+        };
 
-        // --- 2. Navegaci�n SIN EFECTOS (Instant�nea) ---
+        // --- 2. Navegación Lógica ---
         function navigateTo(target, pushToHistory = true) {
+            
+            // INTENTO DE AUTOPLAY AL NAVEGAR (Para que la música empiece al interactuar)
+            const music = document.getElementById('bg-music');
+            if (music.paused && !isMusicPlaying) {
+                // Solo intenta reproducir si el usuario no la pausó explícitamente antes
+                // (Opcional: puedes quitar este bloque si prefieres que solo sea manual)
+                music.play().then(() => {
+                    isMusicPlaying = true;
+                    document.getElementById('music-icon').className = 'ph ph-speaker-high';
+                }).catch(e => console.log("Se requiere interacción para audio"));
+            }
+
+            // Determinar contexto antes de cambiar
+            let sourceContext = currentViewId === 'home' ? 'home' : (currentViewId === 'invitacion' ? 'invitacion' : null);
+            
+            if(!sourceContext && historyStack.length > 0) {
+                const last = historyStack[historyStack.length - 1];
+                sourceContext = last === 'home' ? 'home' : 'invitacion';
+            }
+            if(!sourceContext) sourceContext = 'home';
+
             const nextViewId = target === 'home' ? 'home-view' : `view-${target}`;
             const currentView = document.getElementById(currentViewId === 'home' ? 'home-view' : `view-${currentViewId}`);
             const nextView = document.getElementById(nextViewId);
 
-            if (!nextView) return; // Seguridad si el ID no existe
+            if (!nextView) return;
 
-            // Historial: Solo agregamos si es una navegaci�n nueva, no si estamos volviendo
+            // Historial
             if (pushToHistory && currentViewId !== 'home') {
                 historyStack.push(currentViewId);
             } else if (target === 'home') {
-                // Si vamos al home, limpiamos historial para evitar bucles raros
                 historyStack = [];
             }
 
-            // CAMBIO INSTANT�NEO
+            // Cambiar Vista
             if (currentView) currentView.style.display = 'none';
             
-            // Pausar video al salir
-            const video = document.querySelector('video');
-            if (video && target !== 'recuerdo') video.pause(); 
-            
-            // Galer�a l�gica
-            if(target === 'galeria') startGalleryAuto();
-            else stopGalleryAuto();
+            // Pausar video previo
+            const video = document.getElementById('main-video');
+            if (video) video.pause();
 
-            // Aparecer siguiente
+            // CONTROL DE FOOTER
+            // Ocultar Footer en MAIN, Mostrar en INVITACION y GALERIA
+            const footer = document.getElementById('global-footer');
+            if (target === 'invitacion' || target === 'galeria') {
+                footer.style.display = 'block';
+                // Animación suave de entrada
+                gsap.fromTo(footer, {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.5});
+            } else {
+                footer.style.display = 'none';
+            }
+
+            // Lógica específica por vista
+            if (target === 'galeria') {
+                setupGallery(sourceContext);
+            } else {
+                stopGalleryAuto();
+            }
+
+            if (target === 'recuerdo') {
+                const videoSrc = (sourceContext === 'invitacion') ? videos.invitacion : videos.home;
+                video.src = videoSrc;
+                video.load();
+            }
+
             nextView.style.display = (target === 'home') ? 'block' : 'flex';
-            
-            // Actualizar ID actual
             currentViewId = target;
         }
 
-        // --- 3. Funci�n Volver CORREGIDA ---
         function goBack() {
-            // Si hay historial, sacamos el �ltimo. Si no, forzamos ir a Home.
             if (historyStack.length > 0) {
                 const previousView = historyStack.pop();
-                navigateTo(previousView, false); // false = no a�adir al historial de nuevo
+                navigateTo(previousView, false);
             } else {
-                // Fallback seguro: siempre vuelve a Home si el stack est� vac�o
                 navigateTo('home', false);
             }
         }
 
-        // --- 4. Part�culas "M�gicas" (AUMENTADAS Y GRANDES) ---
+        // --- 3. Lógica de Música ---
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            const icon = document.getElementById('music-icon');
+            
+            if (music.paused) {
+                music.play();
+                icon.className = 'ph ph-speaker-high';
+                isMusicPlaying = true;
+            } else {
+                music.pause();
+                icon.className = 'ph ph-speaker-slash';
+                isMusicPlaying = false;
+            }
+        }
+
+        // --- 4. Configuración de Galería Dinámica ---
+        function setupGallery(context) {
+            const track = document.getElementById('gallery-track-inner');
+            const titleEl = document.getElementById('gallery-title');
+            const descEl = document.getElementById('gallery-desc');
+
+            track.innerHTML = ''; 
+            
+            const config = galleryConfig[context] || galleryConfig.home;
+            
+            titleEl.textContent = config.title;
+            descEl.textContent = config.text;
+
+            config.images.forEach(src => {
+                const div = document.createElement('div');
+                div.className = 'gallery-card';
+                div.onclick = () => openLightbox(src);
+                div.innerHTML = `<img src="${src}" alt="Foto">`;
+                track.appendChild(div);
+            });
+
+            setTimeout(() => startGalleryAuto(config.images.length), 100);
+        }
+
+        function startGalleryAuto(count) {
+            if(galleryAnimation) galleryAnimation.kill();
+            
+            const track = document.getElementById('gallery-track-inner');
+            const cardWidth = 280; 
+            const gap = 20;
+            const totalWidth = count * (cardWidth + gap);
+            const viewportWidth = window.innerWidth;
+            
+            const travelDistance = -(totalWidth - viewportWidth + 40); 
+
+            gsap.set(track, {x: 0});
+            gsap.set("#gallery-progress", {width: "0%"});
+            
+            if (travelDistance > 0) return; 
+
+            const duration = count * 1.5; 
+
+            galleryAnimation = gsap.timeline({ repeat: -1, yoyo: true }); 
+            
+            galleryAnimation = gsap.to(track, {
+                x: travelDistance,
+                duration: duration,
+                ease: "linear",
+                onUpdate: function() {
+                    const progress = this.progress();
+                    gsap.set("#gallery-progress", {width: (progress * 100) + "%"});
+                },
+                repeat: -1,
+                repeatDelay: 0.5,
+                yoyo: true
+            });
+        }
+
+        function stopGalleryAuto() {
+            if(galleryAnimation) galleryAnimation.pause();
+        }
+
+        // --- 5. Lightbox ---
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lb.style.display = 'flex';
+            setTimeout(() => lb.style.opacity = '1', 10);
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.style.opacity = '0';
+            setTimeout(() => lb.style.display = 'none', 300);
+        }
+
+        // --- 6. Partículas y Efectos ---
         function createParticles() {
             const container = document.getElementById('particles-container');
-            const particleCount = 60; // Cantidad
+            const particleCount = 40; 
 
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                // Tama�os M�S GRANDES como pidi� el usuario
-                const size = Math.random() * 8 + 3; // De 3px a 11px
+                const size = Math.random() * 8 + 3;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
                 
-                // Color variado: Oro y Blanco
                 const isGold = Math.random() > 0.5; 
                 particle.style.background = isGold ? 'rgba(255, 215, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)';
-                
-                // Retraso de animaci�n CSS
                 particle.style.animationDelay = `${Math.random() * 5}s`;
 
                 container.appendChild(particle);
 
-                // Movimiento suave con GSAP
-                const speed = Math.random() * 15 + 10; // Movimiento m�s lento y majestuoso
+                const speed = Math.random() * 15 + 10;
                 const dirY = -150 - (Math.random() * 200); 
 
                 gsap.to(particle, {
@@ -585,9 +841,43 @@
                 });
             }
         }
-        createParticles();
 
-        // --- 5. Animaci�n Inicial Home ---
+        function createPartyIcons() {
+            const container = document.getElementById('party-icons-container');
+            const icons = ['🎁', '🎈', '🎉', '🎂', '🥳', '✨'];
+            const iconCount = 15;
+
+            for (let i = 0; i < iconCount; i++) {
+                const icon = document.createElement('div');
+                icon.classList.add('party-icon');
+                icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+                
+                icon.style.left = `${Math.random() * 100}%`;
+                icon.style.top = `${Math.random() * 100 + 100}%`; 
+                
+                const scale = Math.random() * 1 + 0.8; 
+                icon.style.transform = `scale(${scale})`;
+
+                container.appendChild(icon);
+
+                const speed = Math.random() * 20 + 15; 
+                
+                gsap.to(icon, {
+                    y: `-120vh`, 
+                    rotation: Math.random() * 360,
+                    x: `random(-50, 50)`,
+                    duration: speed,
+                    repeat: -1,
+                    ease: "power1.out",
+                    delay: Math.random() * 10
+                });
+            }
+        }
+
+        createParticles();
+        createPartyIcons();
+
+        // --- 7. Animación Inicial Home ---
         gsap.from(".btn-gold", {
             duration: 1.5,
             y: 30,
@@ -597,48 +887,6 @@
             delay: 0.5
         });
 
-        // --- 6. Galer�a Autom�tica (M�S R�PIDA) ---
-        function startGalleryAuto() {
-            if(galleryAnimation) galleryAnimation.kill();
-            
-            // Reset
-            gsap.set(".gallery-track", {x: 0});
-            gsap.set("#gallery-progress", {width: "0%"});
-            
-            galleryAnimation = gsap.timeline({ repeat: -1 });
-            
-            // Tiempos ajustados: 0.8s duraci�n, 1.5s espera (delay)
-            const speed = 0.8; 
-            const pause = 1.2;
-
-            galleryAnimation.to(".gallery-track", {
-                x: "-300px", duration: speed, ease: "power2.out", delay: pause
-            })
-            .to("#gallery-progress", { width: "33%", duration: speed, ease: "power2.out" }, "<")
-            
-            .to(".gallery-track", {
-                x: "-600px", duration: speed, ease: "power2.out", delay: pause
-            })
-            .to("#gallery-progress", { width: "66%", duration: speed, ease: "power2.out" }, "<")
-
-            .to(".gallery-track", {
-                x: "-900px", duration: speed, ease: "power2.out", delay: pause
-            })
-            .to("#gallery-progress", { width: "100%", duration: speed, ease: "power2.out" }, "<")
-
-            .to(".gallery-track", {
-                x: "0px", duration: 0.5, ease: "power4.inOut", delay: 0.5
-            })
-             .to("#gallery-progress", { width: "0%", duration: 0.5 }, "<");
-        }
-
-        function stopGalleryAuto() {
-            if(galleryAnimation) {
-                galleryAnimation.pause();
-            }
-        }
-
-        // --- 7. Ajustes Altura M�vil (Fix barra navegador) ---
         const setAppHeight = () => {
             const doc = document.documentElement;
             doc.style.setProperty('--app-height', `${window.innerHeight}px`);
