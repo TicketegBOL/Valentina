@@ -244,8 +244,11 @@
             background-position: center;
             box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.75); 
             align-items: center;
-            justify-content: center;
+            /* Modificado: usar flex-start y padding para controlar la posición vertical */
+            justify-content: center; 
             padding: 30px;
+            /* Asegurar que el contenido no se pegue abajo */
+            padding-bottom: 80px; 
         }
 
         .invite-container {
@@ -255,8 +258,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* Centrado vertical del contenido dentro del contenedor */
             gap: 15px;
+            /* Añadido margen inferior seguro para que no choque con el footer */
+            margin-bottom: 20px;
         }
 
         .invite-script-text {
@@ -427,10 +432,10 @@
             box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
         }
         
-        video {
+        .video-container iframe {
             width: 100%;
             height: 100%;
-            object-fit: cover; 
+            border: none;
         }
 
         /* =========================================
@@ -590,10 +595,7 @@
             <button class="btn-back" style="position: absolute; top: max(25px, env(safe-area-inset-top) + 10px); left: 25px; z-index: 200;" onclick="goBack()"><i class="ph ph-arrow-left"></i></button>
             
             <div class="video-container">
-                <video id="main-video" controls controlsList="nodownload" playsinline poster="fondo2.jpeg">
-                    <source id="video-source" src="" type="video/mp4">
-                    Tu navegador no soporta video.
-                </video>
+                <iframe src="https://drive.google.com/file/d/1yOOSH_Rcy8Akm2feDW6a2hFkvDRKGbpp/preview" allow="autoplay"></iframe>
             </div>
         </section>
 
@@ -607,7 +609,7 @@
         let galleryAnimation = null;
         let isMusicPlaying = false;
         
-        // Configuración de Medios
+        // Configuración de Medios (Ya no se usan videos locales para Recuerdo, pero se mantienen por si acaso para lógica futura)
         const videos = {
             home: "video.mp4",
             invitacion: "video2.mp4"
@@ -672,10 +674,6 @@
             // Cambiar Vista
             if (currentView) currentView.style.display = 'none';
             
-            // Pausar video previo
-            const video = document.getElementById('main-video');
-            if (video) video.pause();
-
             // CONTROL DE FOOTER
             // Ocultar Footer en MAIN, Mostrar en INVITACION y GALERIA
             const footer = document.getElementById('global-footer');
@@ -694,11 +692,7 @@
                 stopGalleryAuto();
             }
 
-            if (target === 'recuerdo') {
-                const videoSrc = (sourceContext === 'invitacion') ? videos.invitacion : videos.home;
-                video.src = videoSrc;
-                video.load();
-            }
+            // Nota: La lógica de video se simplificó al usar un iframe estático en Recuerdo
 
             nextView.style.display = (target === 'home') ? 'block' : 'flex';
             currentViewId = target;
@@ -769,7 +763,8 @@
             
             if (travelDistance > 0) return; 
 
-            const duration = count * 1.5; 
+            // Duración AUMENTADA para que sea más lento (antes 1.5)
+            const duration = count * 4.0; 
 
             galleryAnimation = gsap.timeline({ repeat: -1, yoyo: true }); 
             
